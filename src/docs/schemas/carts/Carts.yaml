@@ -1,0 +1,40 @@
+components:
+  schemas:
+    Carts:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: Id autogenerado por Mongo.
+        products:
+          type: Array
+          items:
+            productId:
+              type: ObjectId
+              description: Id del producto
+            quantity:
+              type: Number
+              minimun: 0
+              description: Cantidad del producto en el carrito
+            _id:
+              type: ObjectId
+              description: Id autogenerado por Mongo.
+      example:
+        productList: [{
+          productId: {
+            _id: "65aeae876b453f347edf2125",
+            title: Apple Watch,
+            description: Smart watch,
+            code: Apple4,
+            price: 300,
+            status: true,
+            stock: 19,
+            category: Electronica,
+            thumbnail: data:image/jpeg;base64,
+            owner: admin
+          },
+          quantity: 6,
+          _id: "65e65773c941d6f5838a6b30"
+        }] 
+
+        

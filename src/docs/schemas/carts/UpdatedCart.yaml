@@ -1,0 +1,21 @@
+components:
+  requestBodies:
+    UpdatedCart:
+      type: object
+      required:
+        - title
+        - quantity
+      properties:
+        title:
+          type: String
+          description: Nombre del producto
+        quantity:
+          type: Number
+          description: Cantidad del producto en el carrito
+        code:
+          type: ObjectId
+          description: Id autogenerado por Mongo.
+      example:
+        productId: "6581c87a26c8ebdcb254145c"
+        quantity: 2
+

@@ -1,0 +1,26 @@
+paths:
+  /api/carts/{cid}/purchase:
+    post:
+      summary: Crear ticket de compra, indicando el carrito con su cid.
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: id del carrito que desea visualizar.
+          schema:
+            $type: String  
+      responses:
+        "200":
+          description: Respuesta exitosa! Tu compra se ha generado con exito.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#components/schemas/Purchase"
+        "404":
+          description: Error. No se han encontrado el carrito. Se envío un dato no valido.
+        "500":
+          description: Error inesperado en el servidor, no se pudo manejar el proceso.   

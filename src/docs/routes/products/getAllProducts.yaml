@@ -1,0 +1,19 @@
+paths:
+  /api/products:
+    get:
+      summary: Obtiene todos los productos de la App. Se puede filtrar, ordenar y paginar.
+      tags:
+        - Products
+      responses:
+        "200":
+          description: Respuesta exitosa! Retorna un arreglo con los todos los productos.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#components/schemas/Products"
+        "400":
+          description: Error. No se han encontrado los productos.
+
+  

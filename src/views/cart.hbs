@@ -1,0 +1,64 @@
+<div class="container-md">
+
+  <h1 class="mt-4 mb-4 bg-opacity-8 border rounded text-center">CARRITO</h1>
+  <div
+    class="d-flex justify-content-start bg-opacity-8 border rounded pt-1 pb-1 mb-4"
+  >
+    <button id="home" class="btn btn-outline-secondary mx-2">Home</button>
+  </div>
+  <div class="mt-4 mb-4 pt-2 pb-1 bg-opacity-8 border rounded text-center">
+    <h3>Carrito de compras de {{user.name}}</h3>
+  </div>
+  {{#if cart}}
+    <div
+      id="idCart"
+      data-cart-id="{{user.cart}}"
+      class="container row d-flex justify-content-start text-center"
+    >
+      {{#each cart}}
+        <div class="col-sm-4 mb-4">
+          <div class="card" style="width: auto;">
+            <img src={{this.thumbnail}} class="mx-auto mt-2" alt="..." />
+            <div class="card-body">
+              <h5 class="card-title">{{this.title}}</h5>
+              <p class="card-text"><strong>Descripción:</strong>
+                {{this.description}}</p>
+              <p class="card-text"><strong>Categoria:</strong>
+                {{this.category}}</p>
+              <p class="card-text"><strong>Precio:</strong> {{this.price}}</p>
+              <p class="card-text"><strong>Code:</strong> {{this.code}}</p>
+              <p class="card-text"><strong>Stock:</strong> {{this.stock}}</p>
+              <p class="card-text"><strong>Total:</strong> ${{this.amount}}</p>
+              <p class="card-text"><strong>Cantidad:</strong>
+                {{this.quantity}}</p>
+              <button
+                class="btn btn-outline-primary removeProdBtn"
+                data-product-id="{{this.prodId}}"
+              >
+                Remover del carrito
+              </button>
+            </div>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+    <div
+      class="mt-4 pt-2 pb-2 mb-4 bg-opacity-8 border rounded text-center d-flex justify-content-around"
+    >
+      <div>
+        <p>Total: ${{totalAmount}}</p>
+      </div>
+      <button
+        class="btn btn-outline-primary"
+        data-purchase="{{user.cart}}"
+        id="purchase"
+      >
+        Finalizar compra
+      </button>
+    </div>
+  {{else}}
+    <h4 class="text-center">El carrito de compras se ecuentra vacio.</h4>
+  {{/if}}
+</div>
+<script src="/js/cart.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

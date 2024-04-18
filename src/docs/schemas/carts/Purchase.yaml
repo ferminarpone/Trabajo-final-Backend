@@ -1,0 +1,39 @@
+components:
+  schemas:
+    Purchase:
+      type: object
+      properties:
+        mensaje:
+          type: String
+          description: Mensaje de compra exitosa.
+        purchase:
+          type: Array
+          items:
+            type: object
+            properties:
+              updatedProduct:
+                type: object
+                description: Propiedades del producto.
+              amount:
+                type: Number
+                minimun: 0
+                description: Valor total de productos del carrito.
+      example:
+        mensaje: Tu compra se ha generado con exito
+        purchase: [{
+            _id: "65aeae876b453f347edf2125",
+            title: Apple Watch,
+            description: Smart watch,
+            code: Apple4,
+            price: 300,
+            status: true,
+            stock: 19,
+            category: Electronica,
+            thumbnail: data:image/jpeg;base64,
+            owner: admin
+          }]
+        amount: 300
+
+        
+
+        

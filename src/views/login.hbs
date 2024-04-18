@@ -1,0 +1,18 @@
+<div  class="container-md">
+  <h1 class="mt-4 mb-4 bg-opacity-8 border rounded text-center">Login</h1>
+  <form  class="mt-4 mb-4 p-3 bg-opacity-8 border rounded " id="loginForm">
+    <label for="email">Email *</label>
+    <input name="email" id="email" type="email" required="true"/>
+    <br />
+    <label class="mt-2" for="password">Contraseña *</label>
+    <input type="password" id="password" name="password" required="true"/>
+    <input type="submit" />
+  </form>
+  <div class="p-2 bg-opacity-8 border rounded ">
+  <p class="mt-2"><i>¿Olvidaste tu contraseña?   </i><a href="/password-reset">  Reestablecer contraseña</a></p>
+  <p><i>¿No estás registrado?</i> <a href="/register">Regístrate aquí</a></p>
+  <p><i>¿Tienes cuenta de Github?</i> <a href="/github/login">Haz login por Github</a></p>
+  </div>
+</div>
+<script src="/js/login.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
