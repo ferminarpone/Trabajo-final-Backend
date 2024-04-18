@@ -45,15 +45,17 @@ export const loginController = async (req, res) => {
     const tokenUser = new UsersDto(user);
     const acces_token = generateJWTToken(tokenUser);
     res.cookie("jwtCookieToken", acces_token, {
-      maxAge: 360000,
+    /*   maxAge: 360000, */
+    maxAge: 6000,
       httpOnly: true,
     }); 
     // Setear Last connection si caduca la cookie.
      setTimeout(async()=>{
-      const time = `${new Date().toLocaleDateString()} - ${new Date().toLocaleTimeString()}`;
+      /* const time = `${new Date().toLocaleDateString()} - ${new Date().toLocaleTimeString()}`; */
+      const time = new Date(Date.now());
       const resp = await userServices.updateUser(user._id, {
           last_connection: time })
-    }, 360000) 
+    }, 6000 /* 360000 */) 
     res
       .status(200)
       .json({ message: "Login exitoso", role: `${tokenUser.role}` })
@@ -214,15 +216,38 @@ export const getAllUsersController = async (req, res)=>{
       const customUser = new CustomUser(user)
       users.push(customUser);
     });
-
-    console.log(users);
-
     res.send({
       message: "succes",
       payload : users
     })
   } catch (error) {
-console.log(error)
+    res.status(404).json({
+      message: error.message,
+    });
+  }
+}
+
+export const deleteExpirationCountsController = async(req,res)=>{
+  try {
+   
+    const users = await userServices.getUsers();
+    console.log(users)
+    users.forEach(user => {
+      const expirationTime = user.last_connection + 48 * 60 * 1000
+      const time = new Date(Date.now())
+      const timeNumber = time.getTime()
+      if(expirationTime < timeNumber){
+        console.log("Borrar")
+      }
+      console.log("No borrar")
+      console.log(user.first_name)
+      console.log(expirationTime)
+      console.log(timeNumber)
+      console.log("diferencia")
+      console.log(expirationTime > time)
+    });
+    res.send({prueba: "succes"})
+  } catch (error) {
     res.status(404).json({
       message: error.message,
     });

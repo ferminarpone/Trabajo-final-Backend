@@ -21,7 +21,7 @@ const userSchema = new Schema({
       reference: { type: String }
     }
   ],
-  last_connection: { type: String }
+  last_connection: { type: Number }
 });
 
 userSchema.pre("find", function () {
