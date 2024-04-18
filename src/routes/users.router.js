@@ -44,5 +44,6 @@ router.post(
   userController.documentsController
 );  
 
+router.get("/allUsers", userController.getAllUsersController)
 
 export default router;

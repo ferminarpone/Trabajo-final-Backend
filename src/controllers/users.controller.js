@@ -1,11 +1,12 @@
 import passport from "passport";
 import UsersDto from "../services/dto/users.dto.js";
+import CustomUser from "../services/dto/customUser.dto.js";
 import { generateJWTToken, isValidPassword } from "../utils.js";
 import { userServices } from "../services/service.js";
 import jwt from "jsonwebtoken";
 import { v2 } from "../config/config.js";
 import { dataUri } from "../utils.js";
-import { set } from "mongoose";
+
 
 //Register
 export const jwtRegisterController = (req, res, next) => {
@@ -75,9 +76,14 @@ export const loginGithubCallbackController = async (req, res) => {
   req.logger.info("Acces token: ");
   req.logger.info(access_token);
   res.cookie("jwtCookieToken", access_token, {
-    maxAge: 60000,
+    maxAge: 360000,
     httpOnly: true,
   });
+  setTimeout(async()=>{
+    const time = `${new Date().toLocaleDateString()} - ${new Date().toLocaleTimeString()}`;
+    const resp = await userServices.updateUser(user._id, {
+        last_connection: time })
+  }, 360000) 
   res.redirect("/products");
 };
 
@@ -199,3 +205,26 @@ export const documentsController = async (req, res) => {
     });
   }
 };
+
+export const getAllUsersController = async (req, res)=>{
+  try {
+    const result = await userServices.getUsers()
+    let users = [];
+    result.forEach(user => {
+      const customUser = new CustomUser(user)
+      users.push(customUser);
+    });
+
+    console.log(users);
+
+    res.send({
+      message: "succes",
+      payload : users
+    })
+  } catch (error) {
+console.log(error)
+    res.status(404).json({
+      message: error.message,
+    });
+  }
+}
