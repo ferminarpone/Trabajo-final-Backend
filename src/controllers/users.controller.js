@@ -46,8 +46,8 @@ export const loginController = async (req, res) => {
     const tokenUser = new UsersDto(user);
     const acces_token = generateJWTToken(tokenUser);
     res.cookie("jwtCookieToken", acces_token, {
-    /*   maxAge: 360000, */
-    maxAge: 6000,
+      maxAge: 360000, 
+    //maxAge: 6000,
       httpOnly: true,
     }); 
     // Setear Last connection si caduca la cookie.
@@ -56,7 +56,7 @@ export const loginController = async (req, res) => {
       const time = new Date(Date.now());
       const resp = await userServices.updateUser(user._id, {
           last_connection: time })
-    }, 6000 /* 360000 */) 
+    }, 360000) 
     res
       .status(200)
       .json({ message: "Login exitoso", role: `${tokenUser.role}` })
@@ -83,7 +83,8 @@ export const loginGithubCallbackController = async (req, res) => {
     httpOnly: true,
   });
   setTimeout(async()=>{
-    const time = `${new Date().toLocaleDateString()} - ${new Date().toLocaleTimeString()}`;
+    //const time = `${new Date().toLocaleDateString()} - ${new Date().toLocaleTimeString()}`;
+    const time = new Date(Date.now());
     const resp = await userServices.updateUser(user._id, {
         last_connection: time })
   }, 360000) 
@@ -91,7 +92,8 @@ export const loginGithubCallbackController = async (req, res) => {
 };
 
 export const logoutController = async (req, res) => {
-  const time = `${new Date().toLocaleDateString()} - ${new Date().toLocaleTimeString()}`;
+  const time = new Date(Date.now());
+  //const time = `${new Date().toLocaleDateString()} - ${new Date().toLocaleTimeString()}`;
   const user = jwt.verify(req.cookies.jwtCookieToken, "EcommerceSecretKeyJWT");
   try {
     const resp = await userServices.updateUser(user.user.id, {
@@ -99,6 +101,7 @@ export const logoutController = async (req, res) => {
     });
     res.clearCookie("jwtCookieToken").send("Session cerrada correctamente"); 
   } catch (error) {
+    console.log(error)
     res.status(404).json({
       error: error.message,
     });

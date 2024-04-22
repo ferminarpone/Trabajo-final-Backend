@@ -5,6 +5,31 @@ home.addEventListener("click", (e) => {
   window.location.replace("/products");
 });
 
+//Products manager
+const products = document.querySelector("#products");
+products.addEventListener("click", (e) => {
+  e.preventDefault();
+  fetch('/products/realtimeproducts').then((result)=>{
+    if (result.status === 401) {
+      Swal.fire({
+        icon: "error",
+        text: `Usuario no autorizado: Usuario no encontrado en JWT.`,
+        width: 400,
+      });
+    }
+    if (result.status === 403) {
+      Swal.fire({
+        icon: "error",
+        text: `El usuario no tiene permisos para gestionar productos.`,
+        width: 400,
+      });
+    }
+    if (result.status === 200) {
+      window.location.replace("/products/realtimeproducts");
+    }
+  })
+});
+
 //Boton cambiar rol
 const changeRole = document.querySelector("#changeRole");
 changeRole.addEventListener("click", (e) => {
@@ -50,7 +75,7 @@ changeRole.addEventListener("click", (e) => {
     if (result.status === 401) {
       Swal.fire({
         icon: "error",
-        title:"Usuario Administrador.",
+        title: "Usuario Administrador.",
         text: `No es posible modificar el rol.`,
         width: 400,
       });
@@ -80,7 +105,7 @@ formIdentificacion.addEventListener("submit", async (e) => {
   formData.append("file", identificacion);
   formData.set("doc", "Identificación");
 
-  spinner("spinner")
+  spinner("spinner");
 
   fetching(uid, formData, "spinner");
 });
@@ -95,7 +120,7 @@ formDomicilio.addEventListener("submit", async (e) => {
   formData.append("file", domicilio);
   formData.set("doc", "Domicilio");
 
-  spinner("spinnerD")
+  spinner("spinnerD");
 
   fetching(uid, formData, "spinnerD");
 });
@@ -109,7 +134,7 @@ formCuenta.addEventListener("submit", async (e) => {
   formData.append("file", cuenta);
   formData.set("doc", "Cuenta");
 
-  spinner("spinnerC")
+  spinner("spinnerC");
 
   fetching(uid, formData, "spinnerC");
 });
@@ -119,10 +144,8 @@ const fetching = async (uid, formData, clase) => {
     method: "POST",
     body: formData,
   }).then((result) => {
-
     const spinner = document.querySelector(`.${clase}`);
-    spinner.style.display = 'none'; 
-
+    spinner.style.display = "none";
 
     if (result.status === 400) {
       Swal.fire({
@@ -152,5 +175,5 @@ const fetching = async (uid, formData, clase) => {
 
 const spinner = (clase) => {
   const spinner = document.querySelector(`.${clase}`);
-spinner.style.display = "inline-block"; 
+  spinner.style.display = "inline-block";
 };
