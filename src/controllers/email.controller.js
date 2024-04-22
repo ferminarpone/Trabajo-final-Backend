@@ -91,12 +91,12 @@ export const sendEmailToResetPassController = async (req, res) => {
     const pswInfo = {
       token,
       email,
-      expirationTime: new Date(Date.now() + 1 * 60 * 1000),
+      expirationTime: new Date(Date.now() + 1 * 60 * 60 * 1000),
     };
     passwordService.createPswInfo(pswInfo);
 
     mailResetPswOptions.to = email;
-    mailResetPswOptions.html = `Para resetear su contraseña haga click en el siguiente enlace: <a href="${link}> Reset password</a>`;
+    mailResetPswOptions.html = `Para resetear su contraseña haga click en el siguiente enlace: <a href="${link}"> Reset password</a>`;
     transporter.sendMail(mailResetPswOptions, (error, info) => {
       if (error) {
         logger.error("Error al enviar el email " + error);

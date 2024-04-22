@@ -6,6 +6,7 @@ import { userServices } from "../services/service.js";
 import jwt from "jsonwebtoken";
 import { v2 } from "../config/config.js";
 import { dataUri } from "../utils.js";
+import { sendEmailToDeletedUser } from "../utils/sendEmailToDeletedUser.js";
 
 
 //Register
@@ -227,29 +228,22 @@ export const getAllUsersController = async (req, res)=>{
   }
 }
 
-export const deleteExpirationCountsController = async(req,res)=>{
+export const deleteExpiredCountsController = async (req, res) => {
   try {
-   
     const users = await userServices.getUsers();
-    console.log(users)
-    users.forEach(user => {
-      const expirationTime = user.last_connection + 48 * 60 * 1000
-      const time = new Date(Date.now())
-      const timeNumber = time.getTime()
-      if(expirationTime < timeNumber){
-        console.log("Borrar")
-      }
-      console.log("No borrar")
-      console.log(user.first_name)
-      console.log(expirationTime)
-      console.log(timeNumber)
-      console.log("diferencia")
-      console.log(expirationTime > time)
-    });
-    res.send({prueba: "succes"})
+    for (const user of users) {
+      const expirationTime = user.last_connection + /* 48 * 60 */ 1 * 60 * 1000; 
+      const timeNumber = Date.now();
+      if (expirationTime < timeNumber || user.last_connection == null || user.last_connection == undefined) {
+        console.log("Borrar");
+        await userServices.deleteUser(user._id);
+        await sendEmailToDeletedUser(user)
+      } 
+    }
+    res.status(200).send({ message: "Usuario inactivos durante 48hs. eliminados exitosamente." });
   } catch (error) {
     res.status(404).json({
       message: error.message,
     });
   }
-}
+};

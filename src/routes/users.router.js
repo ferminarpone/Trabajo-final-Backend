@@ -46,5 +46,5 @@ router.post(
 
 router.get("/allUsers", userController.getAllUsersController)
 
-router.delete("/delete-expiration-counts", userController.deleteExpirationCountsController)
+router.delete("/delete-expiration-counts", userController.deleteExpiredCountsController)
 export default router;
