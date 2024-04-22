@@ -1,0 +1,45 @@
+<div class="container-md">
+  {{#if users}}
+    <h1 class="mt-4 mb-2 bg-opacity-8 border rounded text-center">Administrador
+      de usuarios</h1>
+    <div
+      class="d-flex justify-content-between bg-opacity-8 border rounded pt-1 pb-1 mb-4"
+    >
+      <button
+        id="profile"
+        class="btn btn-outline-secondary ms-2"
+      >Perfil</button>
+      <button
+        id="idCart"
+        data-cart-id="{{user.cart}}"
+        class="btn btn-outline-secondary me-2"
+      >Gestionar productos</button>
+    </div>
+    <div class="container row d-flex justify-content-start text-center">
+      {{#each users}}
+        <div class="col-sm-4 mb-4">
+          <div class="card py-3"  style="width: auto;">
+            <h4>{{this.name}}</h4>
+            <p class="card-text mt-2"><strong>Email:</strong>
+              {{this.email}}
+            </p>
+            <p class="card-text"><strong>Rol:</strong>
+              {{this.role}}
+            </p>
+            <p class="card-text"><strong>Ultima conexión:</strong>
+              {{this.last_connection}}
+            </p>
+            <button
+              {{!-- id="changeRole"
+              data-user-id="{{user.id}}"
+              data-user-rol="{{user.role}}" --}}
+              class="btn btn-outline-secondary mx-5"
+            >Modificar Rol</button>
+            <button {{!-- id="logout" --}} class="btn btn-danger mx-5 mt-3">
+              Eliminar usuario</button>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  {{/if}}
+</div>

@@ -1,4 +1,5 @@
-import { cartService, productService } from "../services/service.js";
+import CustomUser from "../services/dto/customUser.dto.js";
+import { cartService, productService, userServices } from "../services/service.js";
 
 export const productsViewController = async (req, res) => {
   const { limit, page, sort, filter } = req.query;
@@ -72,3 +73,26 @@ const renderCart = (cart) => {
   });
   return newCart;
 };
+
+
+export const usersManagerViewsController = async (req, res) => {
+  try {
+    const result = await userServices.getUsers();
+    let users = [];
+    result.forEach(user => {
+      const customUser = new CustomUser(user)
+      users.push(customUser);
+    });
+    res.render("users", {
+      users,
+      fileCss: "styles.css"
+    })
+  } catch (error) {
+    req.logger.error(error.message);
+    res.render("home", {
+      error: error.message,
+    });
+  }
+
+}
+
