@@ -41,7 +41,6 @@ document.addEventListener('DOMContentLoaded', ()=> {
   removeProdButtons.forEach((btn) => {
       btn.addEventListener('click', (e)=> {
           const pid = e.target.dataset.productId;
-          console.log(pid)
            fetch(`/api/carts/${cid}/product/${pid}`,{
            method: "DELETE",
            headers: {

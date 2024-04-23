@@ -95,3 +95,36 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+//Delete expired users
+
+expiredUsers = document.querySelector("#expiredUsers");
+expiredUsers.addEventListener('click', (e)=>{
+  e.preventDefault();
+  fetch('api/users/delete-expiration-counts', {
+    method: "delete"
+  }).then((result)=>{
+    if (result.status === 200) {
+      Swal.fire({
+        icon: "success",
+        text: `Usuarios expirados, eliminados exitosamente.`,
+        width: 400,
+      }).then(()=> window.location.reload());
+    }
+    if (result.status === 204) {
+      Swal.fire({
+        icon: "info",
+        text: `Todos los usuarios se encuentran acutalmente activos.`,
+        width: 400,
+      }).then(()=> window.location.reload());
+    }
+    if (result.status === 404) {
+      Swal.fire({
+        icon: "error",
+        text: `Hubo un error al eliminar los usuarios expirados.`,
+        width: 400,
+      }).then(()=> window.location.reload());
+    }
+  })
+
+})

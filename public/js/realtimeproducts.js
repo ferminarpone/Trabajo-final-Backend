@@ -66,11 +66,11 @@ socketClient.on("products_list", (data) => {
 }); 
 
 //Home
-/* const home = document.querySelector('#home');
+const home = document.querySelector('#home');
 home.addEventListener("click", (e)=>{
   e.preventDefault();
   window.location.replace("/products");
-}) */
+}) 
 
 //Profile
 const profile = document.querySelector('#profile');

@@ -14,9 +14,7 @@ form.addEventListener("submit", (e) => {
   }).then((result) => {
     if (result.status === 200) {
       result.json().then((json) => {
-        console.log(json.role)
         alert("Login exitoso");
-/*         window.location.replace("/products"); */
          if(json.role === "User")
          window.location.replace("/products");
          if(json.role === "Admin" || json.role === "Premium") 

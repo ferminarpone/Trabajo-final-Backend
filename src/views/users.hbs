@@ -1,7 +1,6 @@
 <div class="container-md">
-  {{#if users}}
-    <h1 class="mt-4 mb-2 bg-opacity-8 border rounded text-center">Administrador
-      de usuarios</h1>
+  <h1 class="mt-4 mb-2 bg-opacity-8 border rounded text-center">Administrador de
+    usuarios</h1>
     <div
       class="d-flex justify-content-between bg-opacity-8 border rounded pt-1 pb-1 mb-4"
     >
@@ -11,6 +10,14 @@
       >Perfil</button>
       <button id="products" class="btn btn-outline-secondary me-2">Gestionar
         productos</button>
+    </div>
+  {{#if users}}
+    <div
+      class="d-flex justify-content-center bg-opacity-8 border rounded pt-1 pb-1 mb-4"
+    >
+      <button id="expiredUsers" class="btn btn-danger me-2">Eliminar usuarios
+        expirados
+      </button>
     </div>
     <div class="container row d-flex justify-content-start text-center">
       {{#each users}}
@@ -23,25 +30,25 @@
             <p class="card-text"><strong>Rol:</strong>
               {{this.role}}
             </p>
-
-            <p class="card-text"><strong>Id:</strong>
-              {{this.id}}
-            </p>
-
             <p class="card-text"><strong>Ultima conexión:</strong>
               {{this.last_connection}}
             </p>
             <button
               data-user-id="{{this.id}}"
-              data-user-rol="{{this.role}}" 
+              data-user-rol="{{this.role}}"
               class="btn btn-outline-secondary mx-5 changeRole"
             >Modificar Rol</button>
-            <button data-user-id="{{this.id}}" class="btn btn-danger mx-5 mt-3 deleteUser">
+            <button
+              data-user-id="{{this.id}}"
+              class="btn btn-danger mx-5 mt-3 deleteUser"
+            >
               Eliminar usuario</button>
           </div>
         </div>
       {{/each}}
     </div>
+  {{else}}
+      <p class="d-flex justify-content-center bg-opacity-8 border rounded pt-1 pb-1 mt-4">Actualmente no existen usuarios activos.</p>
   {{/if}}
 </div>
 <script src="/js/users.js"></script>

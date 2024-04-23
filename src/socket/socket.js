@@ -48,6 +48,11 @@ const initSocketServer = (server) => {
           });
         }
         await ProductServices.deleteProduct(data._id);
+
+        if(data.owner !== 'admin'){
+          console.log("enviar mail a usuario premium")
+        }
+
         const prod = await ProductServices.getAllProducts();
         socketCliente.emit("products_list", prod.payload);
       } catch (e) {
