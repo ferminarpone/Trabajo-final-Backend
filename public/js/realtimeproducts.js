@@ -78,3 +78,28 @@ profile.addEventListener("click", (e)=>{
   e.preventDefault();
   window.location.replace("/users");
 })
+
+//Users Manager
+const users = document.querySelector('#users');
+users.addEventListener("click", (e)=>{
+  e.preventDefault();
+  fetch("/users-manager").then((result) =>{
+    if (result.status === 401) {
+      Swal.fire({
+        icon: "error",
+        text: `Usuario no autorizado: Usuario no encontrado en JWT.`,
+        width: 400,
+      }).then(()=> window.location.reload());
+    }
+    if (result.status === 403) {
+      Swal.fire({
+        icon: "error",
+        text: `El usuario no tiene permisos para gestionar usuarios.`,
+        width: 400,
+      }).then(()=> window.location.reload());
+    }
+    if (result.status === 200) {
+      window.location.replace("/users-manager");
+    }
+  })
+})

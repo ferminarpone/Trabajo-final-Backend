@@ -8,7 +8,6 @@ import { v2 } from "../config/config.js";
 import { dataUri } from "../utils.js";
 import { sendEmailToDeletedUser } from "../utils/sendEmailToDeletedUser.js";
 
-
 //Register
 export const jwtRegisterController = (req, res, next) => {
   passport.authenticate("register", (err, user, info) => {
@@ -46,21 +45,21 @@ export const loginController = async (req, res) => {
     const tokenUser = new UsersDto(user);
     const acces_token = generateJWTToken(tokenUser);
     res.cookie("jwtCookieToken", acces_token, {
-      maxAge: 360000, 
-    //maxAge: 6000,
+      maxAge: 360000,
+      //maxAge: 6000,
       httpOnly: true,
-    }); 
+    });
     // Setear Last connection si caduca la cookie.
-     setTimeout(async()=>{
+    setTimeout(async () => {
       /* const time = `${new Date().toLocaleDateString()} - ${new Date().toLocaleTimeString()}`; */
       const time = new Date(Date.now());
       const resp = await userServices.updateUser(user._id, {
-          last_connection: time })
-    }, 360000) 
+        last_connection: time,
+      });
+    }, 360000);
     res
       .status(200)
-      .json({ message: "Login exitoso", role: `${tokenUser.role}` })
-
+      .json({ message: "Login exitoso", role: `${tokenUser.role}` });
   } catch (error) {
     req.logger.error(error.message);
     return res
@@ -82,12 +81,13 @@ export const loginGithubCallbackController = async (req, res) => {
     maxAge: 360000,
     httpOnly: true,
   });
-  setTimeout(async()=>{
+  setTimeout(async () => {
     //const time = `${new Date().toLocaleDateString()} - ${new Date().toLocaleTimeString()}`;
     const time = new Date(Date.now());
     const resp = await userServices.updateUser(user._id, {
-        last_connection: time })
-  }, 360000) 
+      last_connection: time,
+    });
+  }, 360000);
   res.redirect("/products");
 };
 
@@ -99,9 +99,9 @@ export const logoutController = async (req, res) => {
     const resp = await userServices.updateUser(user.user.id, {
       last_connection: time,
     });
-    res.clearCookie("jwtCookieToken").send("Session cerrada correctamente"); 
+    res.clearCookie("jwtCookieToken").send("Session cerrada correctamente");
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.status(404).json({
       error: error.message,
     });
@@ -111,14 +111,16 @@ export const logoutController = async (req, res) => {
 export const changeRoleController = async (req, res) => {
   const uid = req.params.uid;
   let user = jwt.verify(req.cookies.jwtCookieToken, "EcommerceSecretKeyJWT");
-  if(user.user.role === "Admin"){
-    return res.status(401).json({
-      error:
-        "Usted es Usuario administrador.",
-    });
+  const getUser = await userServices.getUser({ _id: uid });
+  if (user.user.role === "Admin") {
+    if (getUser.role === "Admin") {
+      return res.status(401).json({
+        error: "Usted es Usuario administrador.",
+      });
+    }
   }
   try {
-    if (user.user.role === "Premium") {
+    if (getUser.role === "Premium") {
       await userServices.updateUser(uid, { role: "User" });
       return res
         .status(200)
@@ -148,7 +150,6 @@ export const changeRoleController = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log(error.message);
     res.status(404).json({
       error: error.message,
     });
@@ -212,38 +213,46 @@ export const documentsController = async (req, res) => {
   }
 };
 
-export const getAllUsersController = async (req, res)=>{
+export const getAllUsersController = async (req, res) => {
   try {
-    const result = await userServices.getUsers()
+    const result = await userServices.getUsers();
     let users = [];
-    result.forEach(user => {
-      const customUser = new CustomUser(user)
+    result.forEach((user) => {
+      const customUser = new CustomUser(user);
       users.push(customUser);
     });
     res.send({
       message: "succes",
-      payload : users
-    })
+      payload: users,
+    });
   } catch (error) {
     res.status(404).json({
       message: error.message,
     });
   }
-}
+};
 
 export const deleteExpiredCountsController = async (req, res) => {
   try {
     const users = await userServices.getUsers();
     for (const user of users) {
-      const expirationTime = user.last_connection + /* 48 * 60 */ 1 * 60 * 1000; 
+      const expirationTime = user.last_connection + /* 48 * 60 */ 1 * 60 * 1000;
       const timeNumber = Date.now();
-      if (expirationTime < timeNumber || user.last_connection == null || user.last_connection == undefined) {
+      if (
+        expirationTime < timeNumber ||
+        user.last_connection == null ||
+        user.last_connection == undefined
+      ) {
         console.log("Borrar");
         await userServices.deleteUser(user._id);
-        await sendEmailToDeletedUser(user)
-      } 
+        await sendEmailToDeletedUser(user);
+      }
     }
-    res.status(200).send({ message: "Usuario inactivos durante 48hs. eliminados exitosamente." });
+    res
+      .status(200)
+      .send({
+        message: "Usuario inactivos durante 48hs. eliminados exitosamente.",
+      });
   } catch (error) {
     res.status(404).json({
       message: error.message,

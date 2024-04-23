@@ -9,16 +9,13 @@
         id="profile"
         class="btn btn-outline-secondary ms-2"
       >Perfil</button>
-      <button
-        id="idCart"
-        data-cart-id="{{user.cart}}"
-        class="btn btn-outline-secondary me-2"
-      >Gestionar productos</button>
+      <button id="products" class="btn btn-outline-secondary me-2">Gestionar
+        productos</button>
     </div>
     <div class="container row d-flex justify-content-start text-center">
       {{#each users}}
         <div class="col-sm-4 mb-4">
-          <div class="card py-3"  style="width: auto;">
+          <div class="card py-3" style="width: auto;">
             <h4>{{this.name}}</h4>
             <p class="card-text mt-2"><strong>Email:</strong>
               {{this.email}}
@@ -26,16 +23,20 @@
             <p class="card-text"><strong>Rol:</strong>
               {{this.role}}
             </p>
+
+            <p class="card-text"><strong>Id:</strong>
+              {{this.id}}
+            </p>
+
             <p class="card-text"><strong>Ultima conexión:</strong>
               {{this.last_connection}}
             </p>
             <button
-              {{!-- id="changeRole"
-              data-user-id="{{user.id}}"
-              data-user-rol="{{user.role}}" --}}
-              class="btn btn-outline-secondary mx-5"
+              data-user-id="{{this.id}}"
+              data-user-rol="{{this.role}}" 
+              class="btn btn-outline-secondary mx-5 changeRole"
             >Modificar Rol</button>
-            <button {{!-- id="logout" --}} class="btn btn-danger mx-5 mt-3">
+            <button data-user-id="{{this.id}}" class="btn btn-danger mx-5 mt-3 deleteUser">
               Eliminar usuario</button>
           </div>
         </div>
@@ -43,3 +44,5 @@
     </div>
   {{/if}}
 </div>
+<script src="/js/users.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
