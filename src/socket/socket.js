@@ -5,17 +5,18 @@ import jwt from "jsonwebtoken";
 import CustomError from "../services/errors/CustomError.js";
 import EErrors from "../services/errors/errors-enum.js";
 import { deleteProductErrorInfo } from "../services/errors/messages/product-creation-error.message.js";
+import { sendEmailForDeletedProduct } from "../utils/sendEmail.js";
+import { userServices } from "../services/service.js";
 
 const initSocketServer = (server) => {
   const socketServer = new Server(server);
   socketServer.on("connection", async (socketCliente) => {
     socketCliente.on("form_information", async (data) => {
-
       const jwtCookieToken = socketCliente.request.headers.cookie.split("=");
       let user = jwt.verify(jwtCookieToken[1], "EcommerceSecretKeyJWT");
 
       try {
-        if(user.user.role === "Premium") {
+        if (user.user.role === "Premium") {
           data.owner = user.user.email;
         }
 
@@ -34,10 +35,9 @@ const initSocketServer = (server) => {
     });
 
     socketCliente.on("product_delete", async (data) => {
-
       const jwtCookieToken = socketCliente.request.headers.cookie.split("=");
       let user = jwt.verify(jwtCookieToken[1], "EcommerceSecretKeyJWT");
-
+      const productOwner = await userServices.getUser({ email: data.owner });
       try {
         if (user.user.role === "Premium" && data.owner !== user.user.email) {
           CustomError.createError({
@@ -48,11 +48,9 @@ const initSocketServer = (server) => {
           });
         }
         await ProductServices.deleteProduct(data._id);
-
-        if(data.owner !== 'admin'){
-          console.log("enviar mail a usuario premium")
+        if (data.owner !== "admin") {
+          sendEmailForDeletedProduct(productOwner, data);
         }
-
         const prod = await ProductServices.getAllProducts();
         socketCliente.emit("products_list", prod.payload);
       } catch (e) {

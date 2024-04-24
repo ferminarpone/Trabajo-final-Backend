@@ -247,7 +247,7 @@ export const deleteExpiredCountsController = async (req, res) => {
         user.role !== "Admin"
       ) {
         await userServices.deleteUser(user._id);
-        await sendEmailToDeletedUser(user);
+        sendEmailToDeletedUser(user);
         expiredUser.push(user);
       }
     }

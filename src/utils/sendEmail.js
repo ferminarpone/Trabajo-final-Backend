@@ -18,14 +18,14 @@ transporter.verify(function (error, success) {
     logger.info("Server is ready to take our messages");
   }
 });
-// Expired User
 
+// Expired User
 const expiredUserOptions = {
   from: "Ecommerce Coderhouse" + config.gmailAccount,
   subject: "Su usuario ha expirado.",
 };
 
-export const sendEmailToDeletedUser = async (user) => {
+export const sendEmailToDeletedUser = (user) => {
   try {
     if (!user.email) {
       throw Error("Usuario sin email");
@@ -43,6 +43,48 @@ export const sendEmailToDeletedUser = async (user) => {
       <p>Muchas gracias.</p>
       </div>`;
     transporter.sendMail(expiredUserOptions, (error, info) => {
+      if (error) {
+        logger.error("Error al enviar el email " + error);
+        throw Error({ message: "Error", payload: error });
+      }
+      logger.info("Message sent: " + info.messageId);
+    });
+  } catch (error) {
+    logger.error("Error al enviar el email " + error);
+    throw Error({
+      error: error,
+      message: "No se pudo enviar el email desde:" + config.gmailAccount,
+    });
+  }
+};
+
+
+// Deleted user premiun product
+
+const deletedProductOptions = {
+  from: "Ecommerce Coderhouse" + config.gmailAccount,
+  subject: "Producto eliminado",
+};
+
+export const sendEmailForDeletedProduct = (user, prod) => {
+  try {
+    if (!user.email) {
+      throw Error("Usuario sin email");
+    }
+    deletedProductOptions.to = user.email;
+    deletedProductOptions.html = `
+      <div>
+      <h3>Hola ${user.first_name}! </h3>
+      <p><strong>Importante!</strong></p>
+      </br>
+      <p>Su producto <strong>"${prod.title}"</strong> con Id <strong>${prod._id}</strong> ha sido eliminado.</p>
+      </br>
+      
+      <a href="http://localhost:8080">Volver a iniciar sesión</a>
+      </br>
+      <p>Muchas gracias.</p>
+      </div>`;
+    transporter.sendMail(deletedProductOptions, (error, info) => {
       if (error) {
         logger.error("Error al enviar el email " + error);
         throw Error({ message: "Error", payload: error });
