@@ -3,6 +3,7 @@ import { validateCart } from "../utils/validateCart.js";
 import { validateProduct } from "../utils/validateProduct.js";
 import { validateProdDel } from "../utils/validateProdDel.js";
 import * as CartsController from "../controllers/carts.controller.js";
+import { authorization, passportCall } from "../utils.js";
 
 const router = Router();
 
@@ -14,6 +15,8 @@ router.post(
   "/:cid/product/:pid",
   validateCart,
   validateProduct,
+  passportCall("jwt"),
+  authorization("User","Premium"),
   CartsController.addProductInCartController
 );
 

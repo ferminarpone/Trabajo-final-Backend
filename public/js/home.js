@@ -16,7 +16,14 @@ document.addEventListener('DOMContentLoaded', ()=> {
             if (result.status === 200) {
                window.location.replace("/products/cart");
             }
-
+            if(result.status === 403){
+              Swal.fire({
+                icon: "error",
+                title: "Admin user",
+                text: `No es posible realizar una compra como Administrador.`,
+                width: 400,
+              }).then(()=> window.location.reload());
+            }
             if(result.status === 404){
               result.json().then((json) => {
                 if(json.error === "Stock insuficiente"){
