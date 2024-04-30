@@ -66,7 +66,7 @@ const Stripe = () => {
         >
           Home
         </button>
-        <CountdownTimer tid={tid}/>
+        <CountdownTimer tid={tid} />
       </div>
       <Wrapper hidden={payment}>
         <div className="container row d-flex justify-content-start text-center ">

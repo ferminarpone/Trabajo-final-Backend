@@ -14,7 +14,6 @@ const CountdownTimer = ({ tid }) => {
       setTimeLeft((prevTime) => {
         let updatedMinutes = prevTime.minutes;
         let updatedSeconds = prevTime.seconds - 1;
-
         if (updatedSeconds < 0) {
           if (updatedMinutes === 0) {
             clearInterval(timerId);
