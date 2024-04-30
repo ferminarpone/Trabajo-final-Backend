@@ -12,15 +12,16 @@ const initSocketServer = (server) => {
   const socketServer = new Server(server);
   socketServer.on("connection", async (socketCliente) => {
     socketCliente.on("form_information", async (data) => {
-    const cookies = socketCliente.request.headers.cookie.split(";");
-    const jwtCookie = cookies.find(cookie => cookie.includes('jwtCookieToken='));
-    const jwtCookieToken = jwtCookie.split('=')
-    let user = jwt.verify(jwtCookieToken[1], "EcommerceSecretKeyJWT");    
-     try {
+      const cookies = socketCliente.request.headers.cookie.split(";");
+      const jwtCookie = cookies.find((cookie) =>
+        cookie.includes("jwtCookieToken=")
+      );
+      const jwtCookieToken = jwtCookie.split("=");
+      let user = jwt.verify(jwtCookieToken[1], "EcommerceSecretKeyJWT");
+      try {
         if (user.user.role === "Premium") {
           data.owner = user.user.email;
         }
-
         await ProductServices.createProduct(data);
         const prod = await ProductServices.getAllProducts();
         socketCliente.emit("products_list", prod.payload);
@@ -32,13 +33,15 @@ const initSocketServer = (server) => {
           );
         }
         socketCliente.emit("products_list", e.message);
-      } 
+      }
     });
 
     socketCliente.on("product_delete", async (data) => {
       const cookies = socketCliente.request.headers.cookie.split(";");
-      const jwtCookie = cookies.find(cookie => cookie.includes('jwtCookieToken='));
-      const jwtCookieToken = jwtCookie.split('=')
+      const jwtCookie = cookies.find((cookie) =>
+        cookie.includes("jwtCookieToken=")
+      );
+      const jwtCookieToken = jwtCookie.split("=");
       let user = jwt.verify(jwtCookieToken[1], "EcommerceSecretKeyJWT");
       const productOwner = await userServices.getUser({ email: data.owner });
       try {

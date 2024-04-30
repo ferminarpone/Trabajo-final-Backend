@@ -1,6 +1,5 @@
 import nodemailer from "nodemailer";
 import config from "../config/config.js";
-import jwt from "jsonwebtoken";
 import {
   passwordService,
   ticketService,
@@ -45,8 +44,8 @@ export const sendEmailController = async (req, res) => {
       from: "Ecommerce Coderhouse" + config.gmailAccount,
       to: user.email,
       subject: "Compra Exitosa!",
-      html: `<div><h1> Gracias por realizar su compra ${user.first_name} </h1>
-    <h2>Detalle de tu compra</h2>
+      html: `<div><h1> Gracias por realizar su compra ${user.first_name}!! </h1>
+    <h2><u>Detalles:</u></h2>
     <h3>Productos: </h3>
     <ul>${data.productList}</ul>
     <h3>Información adicional: </h3>
@@ -58,7 +57,6 @@ export const sendEmailController = async (req, res) => {
     </div>`,
       attachments: [],
     };
-
     let result = transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
         logger.error("Error al enviar el email " + error);
@@ -77,20 +75,14 @@ export const sendEmailController = async (req, res) => {
 };
 
 // Password Reset
-
 const mailResetPswOptions = {
   from: "Ecommerce Coderhouse" + config.gmailAccount,
   subject: "Resetear contraseña",
 };
 
 export const sendEmailToResetPassController = async (req, res) => {
-  // CONDICIONAL, RESET AL OLVIDAR PSW (FORMULARIO), RESET AL CAMBIAR PSW (MAIL DESDE COOKIE)
-
-  //FORMULARIO
-
   try {
     const { email } = req.body;
-
     if (!email) {
       return res.status(400).send("No se ingreso el email");
     }
@@ -106,7 +98,6 @@ export const sendEmailToResetPassController = async (req, res) => {
       expirationTime: new Date(Date.now() + 1 * 60 * 60 * 1000),
     };
     passwordService.createPswInfo(pswInfo);
-
     mailResetPswOptions.to = email;
     mailResetPswOptions.html = `Para resetear su contraseña haga click en el siguiente enlace: <a href="${link}"> Reset password</a>`;
     transporter.sendMail(mailResetPswOptions, (error, info) => {

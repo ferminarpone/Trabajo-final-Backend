@@ -12,32 +12,31 @@ router.get("/", (req, res) => {
 router.get("/register", (req, res) => {
   res.render("register", {
     fileCss: "styles.css",
-  })
+  });
 });
 router.get("/password-reset", (req, res) => {
   res.render("emailPassword", {
     fileCss: "styles.css",
-  })
+  });
 });
 router.get("/api/settings/reset-password/:token", (req, res) => {
   res.render("resetPassword", {
     fileCss: "styles.css",
-  })
+  });
 });
-// Renderización del perfil del usuario, pasar a /products
-router.get(
-  "/users",
-  // passport.authenticate('jwt', { session: false })
-  passportCall("jwt"),
-  /*  authorization('user'), */
-  (req, res) => {
-    res.render("profile", {
-      user: req.user,
-      fileCss: "styles.css",
-    });
-  }
-);
 
-router.get('/users-manager', passportCall("jwt"), authorization('Admin'), usersManagerViewsController)
+router.get("/users", passportCall("jwt"), (req, res) => {
+  res.render("profile", {
+    user: req.user,
+    fileCss: "styles.css",
+  });
+});
+
+router.get(
+  "/users-manager",
+  passportCall("jwt"),
+  authorization("Admin"),
+  usersManagerViewsController
+);
 
 export default router;

@@ -22,7 +22,6 @@ class CartServices {
   async addProductInCart(cid, pid, user) {
     const cart = await cartModel.findById(cid);
     const product = await productService.getProductById(pid);
-
     if (user.role === "Premium" && user.email === product.owner) {
       CustomError.createError({
         name: "Add product in cart error",
@@ -31,7 +30,6 @@ class CartServices {
         code: EErrors.INVALID_TYPES_ERROR,
       });
     }
-
     const searchProduct = cart.products.find((prod) => prod.productId == pid);
     if (!searchProduct) {
       cart.products = [...cart.products, { productId: pid, quantity: 1 }];
@@ -95,17 +93,16 @@ class CartServices {
     try {
       const cart = await this.getCartById(cid, "products.productId");
       const newCart = await this.stockControl(cart);
-      if(newCart.length === 0){
-        throw Error("Stock insuficiente")
-      } 
+      if (newCart.length === 0) {
+        throw Error("Stock insuficiente");
+      }
       const cartId = cart._id;
       const user = await userServices.getUser({ cart: cartId });
       const ticket = await this.createTicket(newCart, user);
       const secondcart = await this.getCartById(cid, "products.productId");
       return ticket;
     } catch (e) {
-      console.log(e)
-      throw Error (e.message)
+      throw Error(e.message);
     }
   }
 
@@ -144,7 +141,6 @@ class CartServices {
       products: cart,
     };
     return await ticketService.createTicket(ticket);
-    //return ticket
   }
 }
 

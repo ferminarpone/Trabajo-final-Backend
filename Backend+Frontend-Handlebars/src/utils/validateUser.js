@@ -1,4 +1,3 @@
-
 export const validateUser = async (req, res, next) => {
   const { first_name, last_name, email, age, password } = req.body;
   const arrayUser = [first_name, last_name, email, age, password];

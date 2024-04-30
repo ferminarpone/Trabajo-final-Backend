@@ -12,7 +12,7 @@ router.get("/", passportCall("jwt"), productsViewController);
 router.get(
   "/realtimeproducts",
   passportCall("jwt"),
-  authorization("Admin","Premium"),
+  authorization("Admin", "Premium"),
   (req, res) => {
     res.render("realtimeproducts.hbs", {
       title: "Ingresar productos",
@@ -23,7 +23,7 @@ router.get(
 
 router.get("/chat", passportCall("jwt"), authorization("User"), (req, res) => {
   res.render("chat.hbs", {
-    title: "Chat",  
+    title: "Chat",
     fileCss: "styles.css",
   });
 });

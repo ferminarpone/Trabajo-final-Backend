@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.addEventListener("click", (e) => {
       const uid = e.target.dataset.userId;
       let role = e.target.dataset.userRol;
-        fetch(`/api/users/premium/${uid}`, {
+      fetch(`/api/users/premium/${uid}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -67,21 +67,21 @@ document.addEventListener("DOMContentLoaded", () => {
               title: "titleSARol",
             },
             width: 400,
-          }).then(()=> window.location.reload());
+          }).then(() => window.location.reload());
         }
         if (result.status === 400) {
           Swal.fire({
             icon: "error",
             text: `Para modificar un usuario a Premium el usuario deberá completar la documentación requerida.`,
             width: 400,
-          }).then(()=> window.location.reload());
+          }).then(() => window.location.reload());
         }
         if (result.status === 404) {
           Swal.fire({
             icon: "error",
             text: `Error al intentar modificar el rol de usuario.`,
             width: 400,
-          }).then(()=> window.location.reload());
+          }).then(() => window.location.reload());
         }
         if (result.status === 401) {
           Swal.fire({
@@ -89,8 +89,8 @@ document.addEventListener("DOMContentLoaded", () => {
             title: "Usuario Administrador.",
             text: `No es posible modificar el rol.`,
             width: 400,
-          }).then(()=> window.location.reload());
-        } 
+          }).then(() => window.location.reload());
+        }
       });
     });
   });
@@ -99,32 +99,31 @@ document.addEventListener("DOMContentLoaded", () => {
 //Delete expired users
 
 expiredUsers = document.querySelector("#expiredUsers");
-expiredUsers.addEventListener('click', (e)=>{
+expiredUsers.addEventListener("click", (e) => {
   e.preventDefault();
-  fetch('api/users/delete-expiration-counts', {
-    method: "delete"
-  }).then((result)=>{
+  fetch("api/users/delete-expiration-counts", {
+    method: "delete",
+  }).then((result) => {
     if (result.status === 200) {
       Swal.fire({
         icon: "success",
         text: `Usuarios expirados, eliminados exitosamente.`,
         width: 400,
-      }).then(()=> window.location.reload());
+      }).then(() => window.location.reload());
     }
     if (result.status === 204) {
       Swal.fire({
         icon: "info",
         text: `Todos los usuarios se encuentran acutalmente activos.`,
         width: 400,
-      }).then(()=> window.location.reload());
+      }).then(() => window.location.reload());
     }
     if (result.status === 404) {
       Swal.fire({
         icon: "error",
         text: `Hubo un error al eliminar los usuarios expirados.`,
         width: 400,
-      }).then(()=> window.location.reload());
+      }).then(() => window.location.reload());
     }
-  })
-
-})
+  });
+});

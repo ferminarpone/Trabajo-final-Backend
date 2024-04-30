@@ -1,16 +1,13 @@
 <div class="container-md">
   <h1 class="mt-4 mb-2 bg-opacity-8 border rounded text-center">Administrador de
     usuarios</h1>
-    <div
-      class="d-flex justify-content-between bg-opacity-8 border rounded pt-1 pb-1 mb-4"
-    >
-      <button
-        id="profile"
-        class="btn btn-outline-secondary ms-2"
-      >Perfil</button>
-      <button id="products" class="btn btn-outline-secondary me-2">Gestionar
-        productos</button>
-    </div>
+  <div
+    class="d-flex justify-content-between bg-opacity-8 border rounded pt-1 pb-1 mb-4"
+  >
+    <button id="profile" class="btn btn-outline-secondary ms-2">Perfil</button>
+    <button id="products" class="btn btn-outline-secondary me-2">Gestionar
+      productos</button>
+  </div>
   {{#if users}}
     <div
       class="d-flex justify-content-center bg-opacity-8 border rounded pt-1 pb-1 mb-4"
@@ -48,7 +45,9 @@
       {{/each}}
     </div>
   {{else}}
-      <p class="d-flex justify-content-center bg-opacity-8 border rounded pt-1 pb-1 mt-4">Actualmente no existen usuarios activos.</p>
+    <p
+      class="d-flex justify-content-center bg-opacity-8 border rounded pt-1 pb-1 mt-4"
+    >Actualmente no existen usuarios activos.</p>
   {{/if}}
 </div>
 <script src="/js/users.js"></script>

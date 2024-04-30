@@ -23,7 +23,7 @@ import MongoSingleton from "./config/mongoDb-singleton.js";
 import { addLogger, logger } from "./config/logger-custom.js";
 import swaggerJsDoc from "swagger-jsdoc";
 import swaggerUIExpress from "swagger-ui-express";
-import cors from 'cors';
+import cors from "cors";
 
 const PORT = program.opts().p === 8080 ? config.port : program.opts().p;
 
@@ -117,7 +117,6 @@ app.get("/loggerTest", (req, res) => {
   req.logger.info("Prueba de log level info --> en Endpoint");
   req.logger.http("Prueba de log level http --> en Endpoint");
   req.logger.debug("Prueba de log level debug --> en Endpoint");
-
   res.send("Prueba de logger!");
 });
 

@@ -6,7 +6,6 @@ resetForm.addEventListener("submit", (e) => {
   const data = new FormData(resetForm);
   const obj = {};
   data.forEach((value, key) => (obj[key] = value));
-  console.log(obj);
   fetch(`/api/settings/reset-password/${token}`, {
     method: "POST",
     body: JSON.stringify(obj),
@@ -14,14 +13,14 @@ resetForm.addEventListener("submit", (e) => {
       "Content-Type": "application/json",
     },
   }).then((result) => {
-    if (result.status === 200) 
-    Swal.fire({
-      icon: "success",
-      text: `Has modificado la contraseña exitosamente!!`,
-      width: 400,
-    }).then((result) => {
-      window.location.replace("/");
-    });
+    if (result.status === 200)
+      Swal.fire({
+        icon: "success",
+        text: `Has modificado la contraseña exitosamente!!`,
+        width: 400,
+      }).then((result) => {
+        window.location.replace("/");
+      });
     if (result.status === 404)
       Swal.fire({
         icon: "error",

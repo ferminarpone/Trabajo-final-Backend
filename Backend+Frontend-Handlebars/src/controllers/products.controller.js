@@ -48,7 +48,7 @@ export const createProductController = async (req, res) => {
     const response = await productService.createProduct(newProduct);
     res.status(200).json({
       mensaje: "El producto fue agregado con exito",
-      response
+      response,
     });
   } catch (e) {
     res.status(400).json({

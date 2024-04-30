@@ -15,10 +15,9 @@ form.addEventListener("submit", (e) => {
     if (result.status === 200) {
       result.json().then((json) => {
         alert("Login exitoso");
-         if(json.role === "User")
-         window.location.replace("/products");
-         if(json.role === "Admin" || json.role === "Premium") 
-         window.location.replace("/products/realtimeproducts"); 
+        if (json.role === "User") window.location.replace("/products");
+        if (json.role === "Admin" || json.role === "Premium")
+          window.location.replace("/products/realtimeproducts");
       });
     } else {
       Swal.fire({

@@ -16,7 +16,7 @@ router.post(
   validateCart,
   validateProduct,
   passportCall("jwt"),
-  authorization("User","Premium"),
+  authorization("User", "Premium"),
   CartsController.addProductInCartController
 );
 
@@ -41,10 +41,10 @@ router.delete(
   validateCart,
   CartsController.deleteProductsInCartController
 );
-//
+
 router.post("/:cid/purchase", CartsController.createPurchaseController);
 
-router.get('/ticket/:tid', CartsController.getTicketController)
+router.get("/ticket/:tid", CartsController.getTicketController);
 
-router.delete('/delete-ticket/:tid', CartsController.deleteTicketController)
+router.delete("/delete-ticket/:tid", CartsController.deleteTicketController);
 export default router;

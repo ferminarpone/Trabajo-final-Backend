@@ -58,9 +58,7 @@ export const sendEmailToDeletedUser = (user) => {
   }
 };
 
-
 // Deleted user premiun product
-
 const deletedProductOptions = {
   from: "Ecommerce Coderhouse" + config.gmailAccount,
   subject: "Producto eliminado",
@@ -79,7 +77,6 @@ export const sendEmailForDeletedProduct = (user, prod) => {
       </br>
       <p>Su producto <strong>"${prod.title}"</strong> con Id <strong>${prod._id}</strong> ha sido eliminado.</p>
       </br>
-      
       <a href="http://localhost:8080">Volver a iniciar sesión</a>
       </br>
       <p>Muchas gracias.</p>

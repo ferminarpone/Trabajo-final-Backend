@@ -11,10 +11,10 @@ export default class TicketRepository {
   };
 
   getTicketById = (id) => {
-    return this.dao.getTicketById(id)
+    return this.dao.getTicketById(id);
   };
 
   deleteTicketById = (id) => {
-    return this.dao.deleteTicketById(id)
-  }
+    return this.dao.deleteTicketById(id);
+  };
 }

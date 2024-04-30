@@ -1,7 +1,6 @@
 import { userModel } from "../models/user.model.js";
 
 class UserServices {
-
   async getUsers() {
     return await userModel.find();
   }
@@ -19,11 +18,11 @@ class UserServices {
   }
 
   async updateUser(id, user) {
-    return await userModel.findByIdAndUpdate(id, user)
+    return await userModel.findByIdAndUpdate(id, user);
   }
 
-  async deleteUser(id){
-    return await userModel.deleteOne(id)
+  async deleteUser(id) {
+    return await userModel.deleteOne(id);
   }
 }
 

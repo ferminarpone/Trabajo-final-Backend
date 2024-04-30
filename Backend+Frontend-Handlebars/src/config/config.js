@@ -33,4 +33,4 @@ const cloudinaryConfig = (req, res, next) => {
   next();
 };
 
-export { cloudinaryConfig, v2 }
+export { cloudinaryConfig, v2 };

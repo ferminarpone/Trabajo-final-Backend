@@ -22,21 +22,20 @@ export const resetPasswordController = async (req, res) => {
     const email = pswInfo.email;
     const user = await userServices.getUser({ email });
     if (password1 != password2)
-      return res
-        .status(400)
-        .send({ message: "Contraseñas diferentes" });
+      return res.status(400).send({ message: "Contraseñas diferentes" });
     if (isValidPassword(user, password1))
-      return res
-        .status(400)
-        .send({
-          message: "Las contraseña nueva, debe ser distinta a la constraseña actual.",
-        });
-    await userServices.updateUser(user._id, {password: createHash(password1)})
-    res.send({message: "Contraseña actualizada correctamente."});
+      return res.status(400).send({
+        message:
+          "Las contraseña nueva, debe ser distinta a la constraseña actual.",
+      });
+    await userServices.updateUser(user._id, {
+      password: createHash(password1),
+    });
+    res.send({ message: "Contraseña actualizada correctamente." });
   } catch (error) {
-    if(error.message === "Expired time"){
-      res.status(404).send(error.message)
-    }else{
+    if (error.message === "Expired time") {
+      res.status(404).send(error.message);
+    } else {
       res.status(500).send(error.message);
     }
   }

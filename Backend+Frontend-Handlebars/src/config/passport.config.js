@@ -20,9 +20,11 @@ const initializePassport = () => {
       async (req, username, password, done) => {
         const { first_name, last_name, email, age } = req.body;
         try {
-          const exist = await userServices.getUser({ email: username })
+          const exist = await userServices.getUser({ email: username });
           if (exist) {
-            return done(null, false, { message: 'El correo electrónico ya está en uso' } );
+            return done(null, false, {
+              message: "El correo electrónico ya está en uso",
+            });
           }
           const user = {
             first_name,
@@ -35,8 +37,8 @@ const initializePassport = () => {
           email === "adminCoder@coder.com" || email === "fermin@gmail.com"
             ? (user.role = "Admin")
             : (user.role = "User");
-            const cart = await cartService.createCart();
-            user.cart = cart._id;
+          const cart = await cartService.createCart();
+          user.cart = cart._id;
           const newUser = await userServices.createUser(user);
           return done(null, newUser);
         } catch (error) {
@@ -82,7 +84,9 @@ const initializePassport = () => {
           const result = await userServices.createUser(newUser);
           return done(null, result);
         } catch (error) {
-          logger.error("Error al intentar loggearse mediante GitHub"+ error.message)
+          logger.error(
+            "Error al intentar loggearse mediante GitHub" + error.message
+          );
           return done(error);
         }
       }
@@ -101,7 +105,7 @@ const initializePassport = () => {
         try {
           return done(null, jwt_payload.user);
         } catch (error) {
-          logger.error("Error de login "+ error.message)
+          logger.error("Error de login " + error.message);
           return done(error);
         }
       }
@@ -121,7 +125,6 @@ const initializePassport = () => {
       logger.error("Error deserializando el usuario: " + error);
     }
   });
-
 };
 
 const cookieExtractor = (req) => {

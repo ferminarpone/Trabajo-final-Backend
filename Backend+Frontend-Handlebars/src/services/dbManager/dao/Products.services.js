@@ -125,7 +125,7 @@ class ProductServices {
   }
 
   async deleteAllProducts() {
-    return await productModel.deleteMany()
+    return await productModel.deleteMany();
   }
 }
 

@@ -21,7 +21,6 @@ export class CartManager {
     this.carts.push(cart);
     const save = await this.saveFile(this.carts);
     if (save) {
-      console.log(`El carrito con id ${cart.id} fue agregado exitosamente.`);
       return true;
     }
     throw Error("Se genero un error al agregar el carrito.");
@@ -61,7 +60,7 @@ export class CartManager {
       throw Error("Se genero un error al agregar el producto al carrito.");
     }
   }
-  
+
   //Función que guarda el nuevo array de carritos en un archivo json.
   async saveFile(data) {
     try {

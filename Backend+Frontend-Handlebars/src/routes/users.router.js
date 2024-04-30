@@ -42,16 +42,19 @@ router.post(
   "/:uid/documents",
   multerUploads.array("file"),
   userController.documentsController
-);  
+);
 
 //Foto de perfil
 router.post(
   "/:uid/profile-photo",
   multerUploads.single("file"),
   userController.profilePhotoController
-);  
+);
 
-router.get("/allUsers", userController.getAllUsersController)
+router.get("/allUsers", userController.getAllUsersController);
 
-router.delete("/delete-expiration-counts", userController.deleteExpiredCountsController)
+router.delete(
+  "/delete-expiration-counts",
+  userController.deleteExpiredCountsController
+);
 export default router;

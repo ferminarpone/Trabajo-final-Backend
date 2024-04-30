@@ -57,7 +57,7 @@ socketClient.on("products_list", (data) => {
       });
     });
   } else {
-    if(typeof(data) === "string"){
+    if (typeof data === "string") {
       return Swal.fire({
         icon: "error",
         text: `${data}`,
@@ -70,43 +70,43 @@ socketClient.on("products_list", (data) => {
       width: 400,
     });
   }
-}); 
+});
 
 //Home
-const home = document.querySelector('#home');
-home.addEventListener("click", (e)=>{
+const home = document.querySelector("#home");
+home.addEventListener("click", (e) => {
   e.preventDefault();
   window.location.replace("/products");
-}) 
+});
 
 //Profile
-const profile = document.querySelector('#profile');
-profile.addEventListener("click", (e)=>{
+const profile = document.querySelector("#profile");
+profile.addEventListener("click", (e) => {
   e.preventDefault();
   window.location.replace("/users");
-})
+});
 
 //Users Manager
-const users = document.querySelector('#users');
-users.addEventListener("click", (e)=>{
+const users = document.querySelector("#users");
+users.addEventListener("click", (e) => {
   e.preventDefault();
-  fetch("/users-manager").then((result) =>{
+  fetch("/users-manager").then((result) => {
     if (result.status === 401) {
       Swal.fire({
         icon: "error",
         text: `Usuario no autorizado: Usuario no encontrado en JWT.`,
         width: 400,
-      }).then(()=> window.location.reload());
+      }).then(() => window.location.reload());
     }
     if (result.status === 403) {
       Swal.fire({
         icon: "error",
         text: `El usuario no tiene permisos para gestionar usuarios.`,
         width: 400,
-      }).then(()=> window.location.reload());
+      }).then(() => window.location.reload());
     }
     if (result.status === 200) {
       window.location.replace("/users-manager");
     }
-  })
-})
+  });
+});

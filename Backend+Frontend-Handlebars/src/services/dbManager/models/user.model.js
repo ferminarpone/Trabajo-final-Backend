@@ -18,11 +18,15 @@ const userSchema = new Schema({
   documents: [
     {
       name: { type: String },
-      reference: { type: String }
-    }
+      reference: { type: String },
+    },
   ],
   last_connection: { type: Number },
-  profile_photo: { type: String, default:"https://res.cloudinary.com/dxptijmov/image/upload/v1713302871/Ecommerce/Profiles/y1hdkxycjxpky9czhdok.webp"}
+  profile_photo: {
+    type: String,
+    default:
+      "https://res.cloudinary.com/dxptijmov/image/upload/v1713302871/Ecommerce/Profiles/y1hdkxycjxpky9czhdok.webp",
+  },
 });
 
 userSchema.pre("find", function () {

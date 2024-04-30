@@ -29,9 +29,6 @@ export class ProductManager {
     }
     const codeValidation = this.validateCode(product);
     if (codeValidation) {
-      console.log(
-        "El 'code' del producto ingresado, ya existe en el gestionador de Productos.\n"
-      );
       throw Error(
         `El 'code' del producto ingresado, ya existe en el gestionador de Productos.`
       );
@@ -43,12 +40,8 @@ export class ProductManager {
     this.products.push(product);
     const save = await this.saveFile(this.products);
     if (save) {
-      console.log(
-        `El producto con id ${product.id} fue agregado exitosamente.`
-      );
       return true;
     }
-    console.log("Se genero un error al agregar el producto.");
     throw Error("Se genero un error al agregar el producto.");
   }
 
@@ -83,13 +76,17 @@ export class ProductManager {
       );
     }
     const stock = newProduct.stock;
-    const product = Object.fromEntries(Object.entries(newProduct).filter(value => value[1]));
-    this.products[indice] = { ...this.products[indice],...product, stock: stock, id: idProducto };
+    const product = Object.fromEntries(
+      Object.entries(newProduct).filter((value) => value[1])
+    );
+    this.products[indice] = {
+      ...this.products[indice],
+      ...product,
+      stock: stock,
+      id: idProducto,
+    };
     const saveUpdate = await this.saveFile(this.products);
     if (saveUpdate) {
-      console.log(
-        `El producto con id ${idProducto} fue actualizado exitosamente.`
-      );
       return true;
     }
     throw Error("Se produjo un error al actualizar el producto.");
@@ -101,15 +98,11 @@ export class ProductManager {
       (product) => product.id === idProducto
     );
     if (indice < 0) {
-      console.log("El producto que desea eliminar, no existe.");
       throw Error(" El producto que desea eliminar, no existe");
     }
     this.products.splice(indice, 1);
     const save = await this.saveFile(this.products);
     if (save) {
-      console.log(
-        `El producto con id ${idProducto} fue eliminado exitosamente.`
-      );
       return true;
     }
     throw Error("Se produjo un error al eliminar el producto.");

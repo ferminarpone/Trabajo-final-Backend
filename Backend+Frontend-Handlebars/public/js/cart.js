@@ -9,7 +9,6 @@ if (purchase) {
         "Content-Type": "application/json",
       },
     }).then((result) => {
-      console.log(result.status);
       if (result.status === 404) {
         Swal.fire({
           title: "Error de compra.",
@@ -19,21 +18,9 @@ if (purchase) {
       }
       if (result.status === 200) {
         result.json().then((json) => {
-          console.log(json.purchase._id);
-          const tid = json.purchase._id
-          window.location.replace(`http://localhost:3000/${tid}`)
+          const tid = json.purchase._id;
+          window.location.replace(`http://localhost:3000/${tid}`);
         });
-        /*  fetch("/api/email");
-        Swal.fire({
-          title: "Compra exitosa!",
-          text: "Revisa el detalle en tu correo electronico!",
-          icon: "success",
-          confirmButtonText: `
-          <span id="confirmButton"></span>OK
-        `,
-        }).then((result) => {
-          window.location.replace("/products/cart");
-        }); */
       }
     });
   });

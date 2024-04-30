@@ -1,7 +1,10 @@
 import CartDao from "../services/dbManager/dao/carts.services.js";
 import CustomError from "../services/errors/CustomError.js";
 import EErrors from "../services/errors/errors-enum.js";
-import { IdCartErrorInfo, nullIdCartErrorInfo } from "../services/errors/messages/cart-creation-error.message.js";
+import {
+  IdCartErrorInfo,
+  nullIdCartErrorInfo,
+} from "../services/errors/messages/cart-creation-error.message.js";
 
 export const validateCart = async (req, res, next) => {
   const { cid } = req.params;
@@ -9,8 +12,7 @@ export const validateCart = async (req, res, next) => {
     CustomError.createError({
       name: "Cart Validate Error",
       cause: nullIdCartErrorInfo(req, cid),
-      message:
-        "El Id del carrito es requerido para continuar.",
+      message: "El Id del carrito es requerido para continuar.",
       code: EErrors.INVALID_TYPES_ERROR,
     });
   }
@@ -20,8 +22,7 @@ export const validateCart = async (req, res, next) => {
       CustomError.createError({
         name: "Cart Validate Error",
         cause: IdCartErrorInfo(req, cid),
-        message:
-        `No existe el carrito con id ${cid}`,
+        message: `No existe el carrito con id ${cid}`,
         code: EErrors.INVALID_TYPES_ERROR,
       });
     }

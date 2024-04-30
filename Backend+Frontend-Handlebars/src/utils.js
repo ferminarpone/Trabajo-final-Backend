@@ -49,8 +49,6 @@ export const passportCall = (strategy) => {
       if (err) return next(err);
       if (!user) {
         return res.render("expired.hbs");
-        /*.status(401)
-          .send({ error: info.messages ? info.messages : info.toString() }); */
       }
       req.user = user;
       next();
@@ -91,7 +89,6 @@ export const generateProduct = () => {
 };
 
 //Multer and Cloudinary config
-
 const storage = multer.memoryStorage();
 
 const multerUploads = multer({

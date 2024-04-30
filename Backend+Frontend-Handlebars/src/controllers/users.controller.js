@@ -15,7 +15,6 @@ export const jwtRegisterController = (req, res, next) => {
       return res.status(500).json({ message: err });
     }
     if (!user) {
-      console.log("usuario existente" + info.message);
       return res.status(409).json({ message: info.message });
     }
     res
@@ -46,12 +45,10 @@ export const loginController = async (req, res) => {
     const acces_token = generateJWTToken(tokenUser);
     res.cookie("jwtCookieToken", acces_token, {
       maxAge: 360000,
-      //maxAge: 6000,
       httpOnly: true,
     });
     // Setear Last connection si caduca la cookie.
     setTimeout(async () => {
-      /* const time = `${new Date().toLocaleDateString()} - ${new Date().toLocaleTimeString()}`; */
       const time = new Date(Date.now());
       const resp = await userServices.updateUser(user._id, {
         last_connection: time,
@@ -82,7 +79,6 @@ export const loginGithubCallbackController = async (req, res) => {
     httpOnly: true,
   });
   setTimeout(async () => {
-    //const time = `${new Date().toLocaleDateString()} - ${new Date().toLocaleTimeString()}`;
     const time = new Date(Date.now());
     const resp = await userServices.updateUser(user._id, {
       last_connection: time,
@@ -93,7 +89,6 @@ export const loginGithubCallbackController = async (req, res) => {
 
 export const logoutController = async (req, res) => {
   const time = new Date(Date.now());
-  //const time = `${new Date().toLocaleDateString()} - ${new Date().toLocaleTimeString()}`;
   const user = jwt.verify(req.cookies.jwtCookieToken, "EcommerceSecretKeyJWT");
   try {
     const resp = await userServices.updateUser(user.user.id, {
@@ -101,7 +96,6 @@ export const logoutController = async (req, res) => {
     });
     res.clearCookie("jwtCookieToken").send("Session cerrada correctamente");
   } catch (error) {
-    console.log(error);
     res.status(404).json({
       error: error.message,
     });
@@ -126,7 +120,6 @@ export const changeRoleController = async (req, res) => {
         .status(200)
         .send({ message: 'Rol modificado a "User" correctamente.' });
     }
-
     const userInfo = await userServices.getUser({
       _id: uid,
       documents: {
@@ -137,7 +130,6 @@ export const changeRoleController = async (req, res) => {
         ],
       },
     });
-
     if (userInfo) {
       await userServices.updateUser(uid, { role: "Premium" });
       return res
@@ -223,7 +215,7 @@ export const profilePhotoController = async (req, res) => {
         folder: "Ecommerce/Profiles",
       });
       const image = result.url;
-      await userServices.updateUser(uid, { profile_photo: image }); 
+      await userServices.updateUser(uid, { profile_photo: image });
       return res.status(200).json({
         messge: "Your documents has been uploded successfully to cloudinary",
       });

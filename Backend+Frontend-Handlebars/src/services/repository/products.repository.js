@@ -17,7 +17,7 @@ export default class ProductsRepository {
   deleteProduct = (id) => {
     return this.dao.deleteProduct(id);
   };
-  deleteAllProducts = () =>{
+  deleteAllProducts = () => {
     return this.dao.deleteAllProducts();
-  }
+  };
 }

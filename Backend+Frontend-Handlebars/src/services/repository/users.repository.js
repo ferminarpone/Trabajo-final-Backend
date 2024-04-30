@@ -1,10 +1,8 @@
-import { id_ID } from "@faker-js/faker";
-
 export default class UsersRepository {
   constructor(dao) {
     this.dao = dao;
   }
-  
+
   getUsers = () => {
     return this.dao.getUsers();
   };
@@ -26,6 +24,6 @@ export default class UsersRepository {
   };
 
   deleteUser = (id) => {
-    return this.dao.deleteUser(id)
-  }
+    return this.dao.deleteUser(id);
+  };
 }

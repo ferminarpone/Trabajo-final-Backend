@@ -9,25 +9,25 @@ home.addEventListener("click", (e) => {
 const products = document.querySelector("#products");
 products.addEventListener("click", (e) => {
   e.preventDefault();
-  fetch('/products/realtimeproducts').then((result)=>{
+  fetch("/products/realtimeproducts").then((result) => {
     if (result.status === 401) {
       Swal.fire({
         icon: "error",
         text: `Usuario no autorizado: Usuario no encontrado en JWT.`,
         width: 400,
-      }).then(()=> window.location.reload());
+      }).then(() => window.location.reload());
     }
     if (result.status === 403) {
       Swal.fire({
         icon: "error",
         text: `El usuario no tiene permisos para gestionar productos.`,
         width: 400,
-      }).then(()=> window.location.reload());
+      }).then(() => window.location.reload());
     }
     if (result.status === 200) {
       window.location.replace("/products/realtimeproducts");
     }
-  })
+  });
 });
 
 //Boton cambiar rol
