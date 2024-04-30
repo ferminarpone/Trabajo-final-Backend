@@ -6,6 +6,7 @@ import passport from "passport";
 import { faker } from "@faker-js/faker/locale/es";
 import multer from "multer";
 import Datauri from "datauri/parser.js";
+import config from "./config/config.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -20,9 +21,10 @@ export const isValidPassword = (user, password) =>
   bcrypt.compareSync(password, user.password);
 
 //JSON Web Tokens (JWT)
-export const PRIVATE_KEY = "EcommerceSecretKeyJWT";
+/* export const PRIVATE_KEY = "EcommerceSecretKeyJWT"; */
+const PRIVATE_KEY = config.privateKey;
 export const generateJWTToken = (user) => {
-  return jwt.sign({ user }, PRIVATE_KEY, { expiresIn: "1h" });
+  return jwt.sign({ user }, PRIVATE_KEY, { expiresIn: "10h" });
 };
 
 //authToken

@@ -22,6 +22,7 @@ export default {
   gmailAppPassword: process.env.GMAIL_APP_PASSWD,
   environment: environment,
   stripeSecretKey: process.env.STRIPE_APP_SECRET_KEY,
+  privateKey: process.env.PRIVATE_KEY
 };
 
 const cloudinaryConfig = (req, res, next) => {

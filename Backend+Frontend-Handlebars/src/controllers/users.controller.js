@@ -44,7 +44,7 @@ export const loginController = async (req, res) => {
     const tokenUser = new UsersDto(user);
     const acces_token = generateJWTToken(tokenUser);
     res.cookie("jwtCookieToken", acces_token, {
-      maxAge: 360000,
+      maxAge: 36000000,
       httpOnly: true,
     });
     // Setear Last connection si caduca la cookie.
@@ -53,7 +53,7 @@ export const loginController = async (req, res) => {
       const resp = await userServices.updateUser(user._id, {
         last_connection: time,
       });
-    }, 360000);
+    }, 36000000);
     res
       .status(200)
       .json({ message: "Login exitoso", role: `${tokenUser.role}` });
@@ -75,7 +75,7 @@ export const loginGithubCallbackController = async (req, res) => {
   req.logger.info("Acces token: ");
   req.logger.info(access_token);
   res.cookie("jwtCookieToken", access_token, {
-    maxAge: 360000,
+    maxAge: 36000000,
     httpOnly: true,
   });
   setTimeout(async () => {
@@ -83,7 +83,7 @@ export const loginGithubCallbackController = async (req, res) => {
     const resp = await userServices.updateUser(user._id, {
       last_connection: time,
     });
-  }, 360000);
+  }, 36000000);
   res.redirect("/products");
 };
 

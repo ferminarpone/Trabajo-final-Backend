@@ -2,9 +2,10 @@ import passport from "passport";
 import passportLocal from "passport-local";
 import GitHubStrategy from "passport-github2";
 import jwt from "passport-jwt";
-import { PRIVATE_KEY, createHash } from "../utils.js";
+import { createHash } from "../utils.js";
 import { cartService, userServices } from "../services/service.js";
 import { logger } from "./logger-custom.js";
+import config from "./config.js";
 
 //Declaración de estrategia
 const localStrategy = passportLocal.Strategy;
@@ -99,7 +100,7 @@ const initializePassport = () => {
     new JwtStrategy(
       {
         jwtFromRequest: ExtractJWT.fromExtractors([cookieExtractor]),
-        secretOrKey: PRIVATE_KEY,
+        secretOrKey: config.privateKey,
       },
       async (jwt_payload, done) => {
         try {
