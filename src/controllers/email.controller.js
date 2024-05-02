@@ -91,7 +91,8 @@ export const sendEmailToResetPassController = async (req, res) => {
       return res.status(404).send("No user");
     }
     const token = v4();
-    const link = `http://localhost:8080/api/settings/reset-password/${token}`;
+    const link = `https://trabajo-final-backend-production.up.railway.app/api/settings/reset-password/${token}`; 
+    //const link = `http://localhost:8080/api/settings/reset-password/${token}`;
     const pswInfo = {
       token,
       email,

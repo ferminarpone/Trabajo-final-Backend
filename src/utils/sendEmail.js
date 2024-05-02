@@ -35,7 +35,7 @@ export const sendEmailToDeletedUser = (user) => {
       </br>
       <p> Vuelva a crear un usuario para seguir navegando!</p>
       </br>
-      <a href="http://localhost:8080/register">Registrar usuario</a>
+      <a href="https://trabajo-final-backend-production.up.railway.app/register">Registrar usuario</a>
       </br>
       <p>Muchas gracias.</p>
       </div>`;
@@ -74,7 +74,7 @@ export const sendEmailForDeletedProduct = (user, prod) => {
       </br>
       <p>Su producto <strong>"${prod.title}"</strong> con Id <strong>${prod._id}</strong> ha sido eliminado.</p>
       </br>
-      <a href="http://localhost:8080">Volver a iniciar sesión</a>
+      <a href="https://trabajo-final-backend-production.up.railway.app">Volver a iniciar sesión</a>
       </br>
       <p>Muchas gracias.</p>
       </div>`;
