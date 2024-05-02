@@ -1,6 +1,6 @@
 import { Server } from "socket.io";
-import ChatServices from "../services/dbManager/dao/chat.services.js";
-import ProductServices from "../services/dbManager/dao/products.services.js";
+import ChatServices from "../services/dbManager/dao/Chat.services.js";
+import ProductServices from "../services/dbManager/dao/Products.services.js";
 import jwt from "jsonwebtoken";
 import CustomError from "../services/errors/CustomError.js";
 import EErrors from "../services/errors/errors-enum.js";
