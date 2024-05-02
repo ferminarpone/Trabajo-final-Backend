@@ -29,7 +29,7 @@ export const getProductByIdController = async (req, res) => {
     if (productId == null) {
       CustomError.createError({
         name: "Product Id Error",
-        cause: IdProductErrorInfo(pid),
+        cause: IdProductErrorInfo(req, pid),
         message: `El producto con id ${pid} no existe`,
         code: EErrors.INVALID_TYPES_ERROR,
       });
@@ -51,7 +51,7 @@ export const createProductController = async (req, res) => {
       response,
     });
   } catch (e) {
-    res.status(400).json({
+    res.status(500).json({
       error: e.message,
     });
   }
@@ -65,7 +65,7 @@ export const updateProductController = async (req, res) => {
     if (response == null) {
       CustomError.createError({
         name: "Product Id Error",
-        cause: IdProductErrorInfo(pid),
+        cause: IdProductErrorInfo(req, pid),
         message: `El producto con id ${pid} no existe`,
         code: EErrors.INVALID_TYPES_ERROR,
       });
@@ -87,7 +87,7 @@ export const deleteProductController = async (req, res) => {
     if (response == null) {
       CustomError.createError({
         name: "Product Id Error",
-        cause: IdProductErrorInfo(pid),
+        cause: IdProductErrorInfo(req, pid),
         message: `El producto con id ${pid} no existe`,
         code: EErrors.INVALID_TYPES_ERROR,
       });

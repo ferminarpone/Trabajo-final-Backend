@@ -12,11 +12,8 @@ const transporter = nodemailer.createTransport({
 });
 
 transporter.verify(function (error, success) {
-  if (error) {
+  if (error) 
     logger.error(error);
-  } else {
-    logger.info("Server is ready to take our messages");
-  }
 });
 
 // Expired User
