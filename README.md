@@ -21,21 +21,49 @@ https://trabajo-final-backend-production.up.railway.app/
 
 ### NAVEGABILIDAD
 ---
-* Haciendo click con el mouse sobre "brand" es decir la marca **Triumph** podrás situarte sobre la página de inicio. 
-* Clickeando sobre el botón de menú **MOTOS** podrás acceder a un desplegable, en donde tendrás la posibilidar de acceder a 4 sitios:    
-    * **CATÁLOGO COMPLETO:**
-    Haciendo click sobre esta opción podrás visualizar el catálogo completo de motos.
-    * **ROADSTERS:**
-Haciendo click sobre esta opción podrás visualizar el cátalogo completo de motos de la sección Roadsters.
-    * **ADVENTURE:**
-Haciendo click sobre esta opción podrás visualizar el cátalogo completo de motos de la sección Adventure.
-    * **MODERN CLASSICS:**
-Haciendo click sobre esta opción podrás visualizar el cátalogo completo de motos de la sección Modern Classics.
-* Una vez que te encuentres visualizando los productos de la categoría seleccionada, podrás acceder al detalle particular de la moto que más te guste, haciendo click en el botón **Ver detalles**.
-* Si has optado por visualizar los detalles de la moto que más te gusta, tendrás la posibilidad de acceder a más información de la misma, como también te encontrarás con botones para aumentar o disminuir la cantidad de items del mismo producto que desea comprar. Y por último, una vez seleccionada la cantidad podrás agregar la moto y dirigirte al carrito de compras, clickeando sobre el botón **Agregar a carrito**.
-* Por último, pero no menos importante, el "NavBar" de la aplicación cuenta con un ícono sobre la derecha del usuario, la cual te permite dirigirte hacia el carrito de compras.
+* En la pagina principal encontrar el Login de la pagina. Distintas alternativas:
+    * Realizar el login si ya se encuentra registrado.
+    * Restablecer la contraseña.
+    * Realizar un registro si aún no se encuentra registrado.
+    * Realizar el login mediante cuenta de GitHub.
 
+**Login:** Ingresar Email y contraseña para ingresar.
+**Restablecer contraseña:** Deberas ingresar tu correo electrónico. Luego te llegara un email con un link donde podras reestablecer la contraseña. El mismo expirará luego de una hora. El link abrira una nueva página donde deberás ingresar tu correo, contraseña y volver a verificar la contraseña.
+**Registro:** Deberás ingresar los datos solicitados para crear una nueva cuenta. En todos los casos se creará con el rol de User.
 
+* Una vez ingresadas tus credenciales, podras visualizar todos los productos disponibles con sus detalles y tendrás la posibilidad de agregarlos al carrito de compras.
+* Además en la parte superior, tendrás la psoibilidad de navegar por el **Perfil** de usuario **Carrito de compras** y acceder al **Chat online**
+
+**Perfil:** Aqui podras administrar tus datos personales. Modificar tu foto de perfil y modificar el rol a usuario **Premium**.
+    * **Usuario Premium:** 
+        * Si cambias tu rol a Premium, ademas de comprar podras vender tus productos. 
+        * Para modificar el rol sera necesario completar la documentación necesaria. Podras hacerlo desde tu perfil.
+        * Podras visualizar el cambio de rol, en tu siguiente inicio de sesión.
+        * Si eres usuario **Premium** tu pagina principal, no sera **HOME** si no la de **Manager de productos**.
+
+**Manager de productos*:** Si eres usuario **Premium** o **Administrador (adminCoder@coder.com)** podras agregrar productos para vender a la DDBB de la aplicación ingresando los datos requeridos.
+Además podras eliminar tus productos si lo deseas. Solo el **Administrador** podra eliminar cualquiera de los productos de la DDBB.
+
+**Gestionar usuarios:** Solo si eres **Administrador** podras ingresar a gestionar usuarios donde podras:
+    * **Eliminar usuarios expirados:** Podras eliminar todos los usuarios inactivos (No utilizados en las ultimas 48 hs.).
+    * **Eliminar un usuario**
+    * **Modificar el rol de un usuario** 
+
+**FLUJO DE COMPRA**
+    * Solo los usuarios con rol **USER** o **PREMIUM** podran agregar productos al carrito y realizar una compra.
+    * Desde la pagina **HOME** podras agregar el producto que deseas haciendo click en el boton **Agregar a carrito**.
+    * Al agregar un producto la aplicación te direccionará automaicamente al carrito de compras.
+    * Si deseas agregar otro producto o sumar mayor cantidad del mismo producto, deberas volver a la pagina de **HOME**
+**Carrito:** 
+    * Aqui podras visualizar todos los productos que haz previamente seleccionado.
+    * Podrás remover los productos que desees, haciendo click sobre el boton **Remover del carrito**
+    * Podras visualizar el monto total de los productos seleccionados.
+    * Una vez que estas seguro de todos los productos que desas comprar deberas seleccionar el boton **Finalizar compra**.
+        * Este boton te rediccionara a una nueva pagina, la cual contendra el detalle de los productos seleccionados.
+        * Solo encontraras los productos para los cuales haya el stock necesario para la cantidad requerida. (Esto podras chequearlo previamente en el detalle de tu carrito).
+    * **Detalles de compra** Aqui podras chequear todos los productos que compraras, previo a realizar el pago. Para lo que deberas acceder al pago haciendo click sobre **Ir a pagar**. Contaras con 10 minutos para realizar tu pago. En caso contrario los productos volveran a su stock.
+    * **Ir a pagar** Aqui podras ingresar los datos de tu tarjeta de credito/debito para realizar finalmente el pago.
+    * Por ultimo te llegara un correo electronico, donde podras visualizar el datella de la compra que has realizado.
 
 
 
