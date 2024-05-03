@@ -7,7 +7,7 @@ router.get("/login", (req, res) => {
 });
 
 router.get("/error", (req, res) => {
-  res.render("error", { error: "No se pudo autenticar usando GitHub!" });
+  res.render("github-error", { error: "No se pudo autenticar usando GitHub!" });
 });
 
 export default router;

@@ -69,22 +69,26 @@ export const loginController = async (req, res) => {
 export const loginGithubController = async (req, res) => {};
 
 export const loginGithubCallbackController = async (req, res) => {
-  const user = req.user;
-  const tokenUser = new UsersDto(user);
-  const access_token = generateJWTToken(tokenUser);
-  req.logger.info("Acces token: ");
-  req.logger.info(access_token);
-  res.cookie("jwtCookieToken", access_token, {
-    maxAge: 36000000,
-    httpOnly: true,
-  });
-  setTimeout(async () => {
-    const time = new Date(Date.now());
-    const resp = await userServices.updateUser(user._id, {
-      last_connection: time,
+  try {    
+    const user = req.user;
+    const tokenUser = new UsersDto(user);
+    const access_token = generateJWTToken(tokenUser);
+    req.logger.info("Acces token: ");
+    req.logger.info(access_token);
+    res.cookie("jwtCookieToken", access_token, {
+      maxAge: 36000000,
+      httpOnly: true,
     });
-  }, 36000000);
-  res.redirect("/products");
+    setTimeout(async () => {
+      const time = new Date(Date.now());
+      const resp = await userServices.updateUser(user._id, {
+        last_connection: time,
+      });
+    }, 36000000);
+    res.redirect("/products");
+  } catch (error) {
+    console.log(error)
+  }
 };
 
 export const logoutController = async (req, res) => {
