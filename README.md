@@ -69,7 +69,9 @@ Además podras eliminar tus productos si lo deseas. Solo el **Administrador** po
 * Una vez que estas seguro de todos los productos que desas comprar deberas seleccionar el boton **Finalizar compra**.
     * Este boton te rediccionara a una nueva pagina, la cual contendra el detalle de los productos seleccionados.
     * Solo encontraras los productos para los cuales haya el stock necesario para la cantidad requerida. (Esto podras chequearlo previamente en el detalle de tu carrito).
+
  **Detalles de compra** Aqui podras chequear todos los productos que compraras, previo a realizar el pago. Para lo que deberas acceder al pago haciendo click sobre **Ir a pagar**. Contaras con 10 minutos para realizar tu pago. En caso contrario los productos volveran a su stock.
+
  **Ir a pagar** Aqui podras ingresar los datos de tu tarjeta de credito/debito para realizar finalmente el pago.
     * Por ultimo te llegara un correo electronico, donde podras visualizar el datella de la compra que has realizado.
 
