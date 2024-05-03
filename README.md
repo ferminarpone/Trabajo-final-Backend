@@ -46,7 +46,7 @@ https://trabajo-final-backend-production.up.railway.app/
      * Podras visualizar el cambio de rol, en tu siguiente inicio de sesión.
      * Si eres usuario **Premium** tu pagina principal, no sera **HOME** si no la de **Manager de productos**.
 
-**Manager de productos*:** 
+**Manager de productos:** 
 Si eres usuario **Premium** o **Administrador (adminCoder@coder.com)** podras agregrar productos para vender a la DDBB de la aplicación ingresando los datos requeridos.
 
 Además podras eliminar tus productos si lo deseas. Solo el **Administrador** podra eliminar cualquiera de los productos de la DDBB.
@@ -61,6 +61,7 @@ Además podras eliminar tus productos si lo deseas. Solo el **Administrador** po
 * Desde la pagina **HOME** podras agregar el producto que deseas haciendo click en el boton **Agregar a carrito**.
 * Al agregar un producto la aplicación te direccionará automaicamente al carrito de compras.
 * Si deseas agregar otro producto o sumar mayor cantidad del mismo producto, deberas volver a la pagina de **HOME**
+
 **Carrito:** 
 * Aqui podras visualizar todos los productos que haz previamente seleccionado.
 * Podrás remover los productos que desees, haciendo click sobre el boton **Remover del carrito**
@@ -68,8 +69,8 @@ Además podras eliminar tus productos si lo deseas. Solo el **Administrador** po
 * Una vez que estas seguro de todos los productos que desas comprar deberas seleccionar el boton **Finalizar compra**.
     * Este boton te rediccionara a una nueva pagina, la cual contendra el detalle de los productos seleccionados.
     * Solo encontraras los productos para los cuales haya el stock necesario para la cantidad requerida. (Esto podras chequearlo previamente en el detalle de tu carrito).
-    * **Detalles de compra** Aqui podras chequear todos los productos que compraras, previo a realizar el pago. Para lo que deberas acceder al pago haciendo click sobre **Ir a pagar**. Contaras con 10 minutos para realizar tu pago. En caso contrario los productos volveran a su stock.
-    * **Ir a pagar** Aqui podras ingresar los datos de tu tarjeta de credito/debito para realizar finalmente el pago.
+ * **Detalles de compra** Aqui podras chequear todos los productos que compraras, previo a realizar el pago. Para lo que deberas acceder al pago haciendo click sobre **Ir a pagar**. Contaras con 10 minutos para realizar tu pago. En caso contrario los productos volveran a su stock.
+ * **Ir a pagar** Aqui podras ingresar los datos de tu tarjeta de credito/debito para realizar finalmente el pago.
     * Por ultimo te llegara un correo electronico, donde podras visualizar el datella de la compra que has realizado.
 
 
