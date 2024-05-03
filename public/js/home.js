@@ -57,3 +57,10 @@ cart.addEventListener("click", (e) => {
   e.preventDefault();
   window.location.replace("/products/cart");
 });
+
+//Ir a chat
+const chat = document.querySelector("#chat");
+chat.addEventListener("click", (e) => {
+  e.preventDefault();
+  window.location.replace("/products/chat");
+});

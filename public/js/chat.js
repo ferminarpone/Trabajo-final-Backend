@@ -32,3 +32,17 @@ socketChatClient.on("chat_allMessages", (data) => {
     });
   }
 });
+
+//Ir a perfil
+const profile = document.querySelector("#profile");
+profile.addEventListener("click", (e) => {
+  e.preventDefault();
+  window.location.replace("/users");
+});
+
+//Ir a carrito
+const home = document.querySelector("#home");
+home.addEventListener("click", (e) => {
+  e.preventDefault();
+  window.location.replace("/products");
+});
