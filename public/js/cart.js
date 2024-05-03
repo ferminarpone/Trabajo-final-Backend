@@ -19,7 +19,7 @@ if (purchase) {
       if (result.status === 200) {
         result.json().then((json) => {
           const tid = json.purchase._id;
-          window.location.replace(`http://localhost:3000/${tid}`);
+          window.location.replace(`https://trabajo-final-payments-production.up.railway.app/${tid}`);
         });
       }
     });
